@@ -1,99 +1,53 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Tambah Produk</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+@extends('layouts.app')
 
-    <style>
-        body {
-            background-color: #f8fafc;
-        }
+@section('content')
+<div class="container mt-4">
+    <h2 class="fw-bold mb-4">Form Tambah Produk</h2>
 
-        .form-control, .form-select {
-            background-color: #e9f5ff; /* warna biru muda */
-            border: 1px solid #b3d8ff;
-            transition: 0.3s;
-        }
-
-        .form-control:focus, .form-select:focus {
-            background-color: #d6eeff;
-            border-color: #66b3ff;
-            box-shadow: 0 0 0 0.2rem rgba(102,179,255,0.25);
-        }
-
-        .card {
-            border-radius: 12px;
-        }
-
-        .btn-success {
-            background-color: #198754;
-            border-radius: 8px;
-        }
-
-        .btn-success:hover {
-            background-color: #157347;
-        }
-
-        label {
-            font-weight: 600;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-        <div class="container">
-            <a class="navbar-brand fw-semibold" href="#">UTS Laravel</a>
-        </div>
-    </nav>
-
-    <!-- Form Section -->
-    <div class="container my-5">
-        <h2 class="text-center fw-bold mb-4">Form Tambah Produk</h2>
-
-        <div class="card shadow-sm border-0">
-            <div class="card-body p-4">
-                <form action="#" method="POST">
-                    @csrf
-                    <div class="row mb-3">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Kode Produk</label>
-                            <input type="text" name="kode_produk" class="form-control" placeholder="Masukkan kode produk">
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Nama Produk</label>
-                            <input type="text" name="nama_produk" class="form-control" placeholder="Masukkan nama produk">
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Jenis Produk</label>
-                            <select name="jenis_produk" class="form-select">
-                                <option selected disabled>Pilih Produk</option>
-                                <option value="Makanan">Makanan</option>
-                                <option value="Minuman">Minuman</option>
-                                <option value="Elektronik">Elektronik</option>
-                                <option value="Pakaian">Pakaian</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Harga</label>
-                            <input type="number" name="harga" class="form-control" placeholder="Masukkan harga">
-                        </div>
-                    </div>
-
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-success px-5">Simpan</button>
-                    </div>
-                </form>
+    <form action="{{ route('produk.store') }}" method="POST" class="shadow p-4 rounded bg-white">
+        @csrf
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label for="kode_produk" class="form-label">Kode Produk</label>
+                <input type="text" name="kode_produk" id="kode_produk" class="form-control" placeholder="Input Kode Produk" required>
+            </div>
+            <div class="col-md-4">
+                <label for="nama_produk" class="form-label">Nama Produk</label>
+                <input type="text" name="nama_produk" id="nama_produk" class="form-control" placeholder="Input Nama Produk" required>
+            </div>
+            <div class="col-md-4">
+                <label for="jenis_produk" class="form-label">Jenis Produk</label>
+                <select name="jenis_produk" id="jenis_produk" class="form-select" required>
+                    <option value="">Pilih Produk</option>
+                    <option value="Alat Tulis">Alat Tulis</option>
+                    <option value="Elektronik">Elektronik</option>
+                    <option value="Sembako">Sembako</option>
+                    <option value="Pakaian">Pakaian</option>
+                    <option value="Makanan">Makanan</option>
+                </select>
             </div>
         </div>
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="harga" class="form-label">Harga</label>
+                <input type="number" name="harga" id="harga" class="form-control" placeholder="Input Harga" required>
+            </div>
+            <div class="col-md-6">
+                <label for="stok" class="form-label">Stok Produk</label>
+                <input type="number" name="stok" id="stok" class="form-control" placeholder="Input Jumlah Stok" required>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="deskripsi" class="form-label">Deskripsi Produk</label>
+            <textarea name="deskripsi" id="deskripsi" rows="3" class="form-control" placeholder="Tulis deskripsi produk..."></textarea>
+        </div>
+
+        <div class="text-end">
+            <button type="submit" class="btn btn-success px-4">Simpan</button>
+            <a href="{{ route('produk.index') }}" class="btn btn-secondary px-4">Batal</a>
+        </div>
+    </form>
+</div>
+@endsection
